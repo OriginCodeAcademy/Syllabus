@@ -22,6 +22,7 @@ These coding standards should act as a guideline for writing consistent, legible
 
 
 ## `.cs` File Layout
+[Jump to Table of Contents](#table-of-contents)
 
 Keep your classes/files short, don't exceed 2000 LOC (lines of code), divide your code up, make structures clearer. Put
 every class in a separate file and name the file like the class name (with .cs as extension of course). This
@@ -126,6 +127,7 @@ namespace MyLib.Data
 ```
 
 ## Directory Layout
+[Jump to Table of Contents](#table-of-contents)
 
 ### Reflect your namespaces in your directory structure
 
@@ -182,6 +184,7 @@ Example
 ```
 
 ## Declarations
+[Jump to Table of Contents](#table-of-contents)
 
 ### Declaring Types
 Leave an empty line between every type definition:
@@ -249,6 +252,8 @@ public enum PhoneTypes
 ```
 
 ## Casing
+[Jump to Table of Contents](#table-of-contents)
+
 Microsoft wants you to use `PascalCase` or `camelCase` only in C#. The following table summaries the casing rules for identifiers and provides examples for the different types of identifiers.
 
 <table>
@@ -319,19 +324,28 @@ Microsoft wants you to use `PascalCase` or `camelCase` only in C#. The following
 </table>
 
 ## Indentation
+[Jump to Table of Contents](#table-of-contents)
 
 ## Spacing
+[Jump to Table of Contents](#table-of-contents)
 
 ## Statements
+[Jump to Table of Contents](#table-of-contents)
 
 ## Naming Convention
+[Jump to Table of Contents](#table-of-contents)
 
 ## Documenting Code
+[Jump to Table of Contents](#table-of-contents)
 
 ## Initializing Objects and Collections
+[Jump to Table of Contents](#table-of-contents)
 
 ## Long Argument Lists
+[Jump to Table of Contents](#table-of-contents)
 
 ## Error Handling
+[Jump to Table of Contents](#table-of-contents)
 
 ## Programming Practices
+[Jump to Table of Contents](#table-of-contents)
