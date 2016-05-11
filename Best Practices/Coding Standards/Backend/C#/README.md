@@ -6,7 +6,7 @@ These coding standards should act as a guideline for writing consistent, legible
 
 ## Table of Contents
 
-1. [`.cs` File Layout](#.cs-file-layout)
+1. [`.cs` File Layout](#cs-file-layout)
 1. [Directory Layout](#directory-layout)
 1. [Declarations](#declarations)
 1. [Casing](#casing)
