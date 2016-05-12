@@ -326,14 +326,282 @@ Microsoft wants you to use `PascalCase` or `camelCase` only in C#. The following
 ## Indentation
 [Jump to Table of Contents](#table-of-contents)
 
+When an expression will not fit on a single line, break it up according to these general principles:
+
+- Break after a comma `,`.
+- Break after an operator `+ - / * && || > < >= <= == !=`
+- Align the new line with the beginning of the expression at the same level on the previous line
+
+Example: Breaking up a large Lambda Expression
+```csharp
+var studentsMatchingTerm = db.Students.Where(s => s.FirstName.Contains(searchTerm) ||
+												  s.LastName.Contains(searchTerm) ||
+												  s.EmailAddress.Contains(searchTerm));
+``` 
+
+Example: Breaking up a chain of method calls
+```csharp
+// Good - Method calls are broken into multiple lines and aligned with eachother
+modelBuilder.Entity<Student>()
+			.HasMany(s => s.Projects)
+			.WithRequired(p => p.Student)
+			.HasForeignKey(p => p.StudentId);
+			
+// Bad - Some method calls are not broken into multiple lines and are not aligned with eachother
+modelBuilder.Entity<Student>().HasMany(s => s.Projects)
+	.WithRequired(p => p.Student).HasForeignKey(p => p.StudentId);
+```
+
+Example: Breaking up a large arithmetic expression
+```csharp
+// Good - Breaks after an operator
+var result = a * b / (c - g + f) +
+			 4 * z;
+			 
+// Bad - Breaks before a bracket expression closes
+var result = a * b / (c - g +
+			 f) + 4 * z;
+```
+
 ## Spacing
 [Jump to Table of Contents](#table-of-contents)
+
+### Tabs vs Spaces
+An indentation standard for C# was never achieved, and is down to personal preference. What is most important is that you are consistent with your indentation.
+
+At Origin - we advise you to stick with the Visual Studio convention - use tabs to indent - and use the default indent size of 4 spaces. You don't have to change anything in Visual Studio - this is the default.
+
+Example (Using hyphens to indicate spaces)
+```csharp
+using System;
+
+namespace MyApp
+{
+----public class Program
+----{
+--------public static void Main(string[] args)
+--------{
+------------Console.WriteLine("Hello World");
+--------}
+----}
+}
+```
+
+### Blank Lines
+Blank lines improve readability. They provide visual clarity between blocks of code that are logically related.
+
+#### Use one blank line for
+- Methods
+- Properties
+- Local variables in a method and its first statement
+- Logical sections inside a method to improve readability
+
+#### Use two blank lines for
+- Logical sections of a source file
+- Class and interface definitions (Put classes/interfaces in their own file to prevent this case)
 
 ## Statements
 [Jump to Table of Contents](#table-of-contents)
 
+### Each line should contain only one statement
+```csharp
+
+// Good
+int x = 5; 
+int y = 10;
+
+// Good
+int x = 5,
+	y = 10;
+	
+// Bad
+int x = 0; y = 10;
+
+// Bad
+int x = 0, y = 10;
+```
+
+### A return statement should not use outer most parentheses.
+```csharp
+// Good
+return n * (n + 1) / 2;
+
+// Bad
+return (n * (n + 1) / 2);
+```
+
+### `if` statements
+```csharp
+// Good
+if(price > 50)
+{
+	// Reduce price by 5%
+	return price - (price * 0.05);  
+}
+else
+{
+	return price;
+}
+
+// Bad
+if (price > 50) {
+	return price - (price * 0.05);
+} else {
+	return price;
+}
+```
+
+### `for` / `foreach` statements
+```csharp
+// Good
+for(int i = 0; i < 10; i++)
+{
+	Console.WriteLine(i);
+}
+
+// Acceptable - Braces not needed in a loop containing only one statement
+for(int i = 0; i < 10; i++)
+	Console.WriteLine(i);
+
+// Bad
+for(int i = 0; i < 10; i++) {
+	Console.WriteLine(i);
+}
+
+// Good
+foreach(var student in db.Students)
+{
+	student.AssessGrades();
+}
+
+// Acceptable - Braces not needed in a loop containing only one statement
+foreach(var student in db.Students)
+	student.AssessGrades();
+
+// Bad
+foreach(var student in db.Students) {
+	student.AssessGrades();
+}
+``` 
+
+### `while` statements
+```csharp
+// Good
+while(cohort.WeeksLeft > 12)
+{
+	cohort.TeachWeek();
+}
+
+// Acceptable - Braces not needed in a loop containing only one statement
+while(cohort.WeeksLeft > 12)
+	cohort.TeachWeek();
+	
+// Bad
+while(cohort.WeeksLeft > 12) {
+	cohort.TeachWeek();
+}
+```
+
+### `switch` statements
+```csharp
+// Good
+switch(condition) 
+{
+	case A:
+		//
+		break;
+	case B:
+		//
+		break;
+	default:
+		//
+		break;	
+}
+
+// Bad (awful)
+switch(condition) {
+case A:
+	break;
+	case B:
+	break;
+case C:
+		break;
+}
+
+```
+
+### `try-catch` statements
+```csharp
+// Good
+try
+{
+	// do something
+}
+catch (Exception e)
+{
+	// handle exception
+}
+
+// Bad
+try {
+	// do something
+}
+catch (Exception e) {
+	// handle exception
+}
+```
+
 ## Naming Convention
 [Jump to Table of Contents](#table-of-contents)
+
+### Label variables as clearly as possible
+```csharp
+// Good
+var fullName = "John Smith";
+
+// Bad
+var x = "John Smith";
+```
+
+### Do not shorten variable names
+```csharp
+// Good
+var sumOfAccountingEntries = db.AccountingEntries.Sum(ae => ae.Balance);
+
+// Bad
+var sumAccntEtrs = db.AccEnt.Sum(ae => ae.Bal);
+```
+
+### Use single character variable names sparingly
+```csharp
+// Good use of single character variable
+for(int i = 0; i < 10; i++)
+	Console.WriteLine(i);
+	
+// Good use of single character variable
+try
+{
+	// do something
+}
+catch (Exception e)
+{
+	// handle exception
+}
+
+// Bad use of single character variable
+decimal x = db.AccountingEntries.Sum(ae => ae.Balance);
+
+// Better use in this scenario
+decimal sumOfAccountingEntries = db.AccountingEntries.Sum(ae => ae.Balance);
+```
+
+### Do not infer type in variable names 
+E.g. `string sName = "Cameron";`. This is redundant in a strongly typed language such as C#. The exception to this rule is when you are converting a variable from one type to another in a local method.
+```csharp
+Console.WriteLine("Enter your birth date");
+string strBirthDate = Console.ReadLine();
+DateTime birthDate = DateTime.Parse(strBirthDate);
+```
 
 ## Documenting Code
 [Jump to Table of Contents](#table-of-contents)
