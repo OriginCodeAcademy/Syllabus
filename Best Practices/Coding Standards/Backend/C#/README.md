@@ -16,9 +16,6 @@ These coding standards should act as a guideline for writing consistent, legible
 1. [Naming Conventions](#naming-conventions)
 1. [Documenting Code](#documenting-code)
 1. [Initializing Objects and Collections](#initializing-objects-and-collections)
-1. [Long Argument Lists](#long-argument-lists)
-1. [Error Handling](#error-handling)
-1. [Programming Practices](#programming-practices)
 
 
 ## `.cs` File Layout
@@ -606,14 +603,90 @@ DateTime birthDate = DateTime.Parse(strBirthDate);
 ## Documenting Code
 [Jump to Table of Contents](#table-of-contents)
 
+### Comments
+- Place comments on a separate line, not at the end of a line of code.
+- Begin comment text with an uppercase letter
+- End comment text with a period.
+- Insert one space between the comment delimiter (//) and the comment text.
+
+```csharp
+// This is an example of a good comment.
+var hoursCodedThisYear = (8 * 5) * 50;
+
+var hoursCodedThisYear = (8 * 5) * 50; //this is an example of a bad comment
+```
+
+### Summary
+Use `<summary>` to describe a type (`class`, `enum`, `interface`) or a type member (`Property`, `Method`). Use `<remarks>` to add supplemental information to a type description.
+
+It is simple to implement this - just type `///` above a type or type member and Visual Studio will prompt you to write a summary. This is simple to do and makes your code readable and easier for others to maintain. Anything you type in the summary will show up in Intellisense.
+
+```csharp
+/// text for class TestClass
+public class TestClass
+{
+    /// <summary>DoWork is a method in the TestClass class.
+    /// <para>Here's how you could make a second paragraph in a description. <see cref="System.Console.WriteLine(System.String)"/> for information about output statements.</para>
+    /// <seealso cref="TestClass.Main"/>
+    /// </summary>
+    public static void DoWork(int Int1)
+    {
+    }
+
+    /// text for Main
+    static void Main()
+    {
+    }
+}
+
+```
+
 ## Initializing Objects and Collections
 [Jump to Table of Contents](#table-of-contents)
 
-## Long Argument Lists
-[Jump to Table of Contents](#table-of-contents)
+### Object and Collection Initializers
 
-## Error Handling
-[Jump to Table of Contents](#table-of-contents)
+For simple object initialization, you may do a one-liner:
 
-## Programming Practices
-[Jump to Table of Contents](#table-of-contents)
+```csharp
+// Good.
+var person = new Person("Vinny") { Age = 50 };
+
+// Acceptable.
+var person = new Person("Vinny") 
+{
+	Age = 50
+};
+```
+
+Omit the `()` when using parameterless constructors:
+
+```csharp
+// Good.
+var person = new Person { Name = "Bob", Age = 75 };
+
+// Bad.
+var person = new Person() { Name = "Bob", Age = 75 };
+```
+
+For collection initialization, each expression should be on a separate line, and every line should end with a comma `,`:
+
+```csharp
+// Very nice collection initializer.
+var entries = new Dictionary<string, int> {
+	{ "key1", 1 },
+	{ "key2", 2 },
+};
+
+// Very nice object initializer.
+var contact = new Person {
+	Name = "David Siegel",
+	SocialSecurityNumber = 123456789,
+	Address = "1234 Montgomery Circle Drive East",
+};
+
+// Bad collection initializer – multiple entries on one line.
+var entries = new Dictionary<string, int> {
+	{ "key1", 1 }, { "key2", 2 },
+};
+```
