@@ -52,7 +52,11 @@ Conceptually, this means that each coded component or module of an application s
 
 #### Error Handling and Reporting
 
-The idea behind error handling and reporting is to enable our software to anticipate and gracefully handle any errors that can occur in any logical path of the application. The situation where an application error is thrown and the software fails mysteriously to the end user is to be avoided. This means wrapping all calls to internal and external services that could return an application generated error in conditional logic that anticipates and handles these errors. During development, these errors can be logged to the console for identification. Reporting errors to the end user should be handled by the display of error messages either directly on the view page or in pop-up notifications such as Toastr. 
+The idea behind error handling and reporting is to enable our software to anticipate and gracefully handle any errors that can occur in any logical path of the application. The situation where an application error is thrown and the software fails mysteriously to the end user is to be avoided. 
+
+This means wrapping all calls to internal and external services that could return an application generated error in conditional logic that anticipates and handles these errors. During development, these errors can be logged to the console for identification. Reporting errors to the end user should be handled by the display of error messages either directly on the view page or in pop-up notifications such as Toastr. 
+
+Form validation needs to be added for html inputs that receive user-entered data to ensure that values entered are present, if required, and are the correct data type. This can be accomplished using a combination of HTML5 and Angular ngMessages.
 
 ## By Week Four
 
